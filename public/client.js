@@ -1,26 +1,19 @@
-// client-side js
-// run by the browser each time your view template is loaded
+const QUIZ_INTRO_BUTTON = ".intro-button";
+const QUIZ_INTRO_BOX = ".intro-box";
+const QUIZ_QUESTIONS_BOX = ".questions-box";
+const QUIZ_RESULTS_BOX = ".results-box";
 
-// by default, you've got jQuery,
-// add other scripts at the bottom of index.html
-
-$(function() {
-  console.log('hello world :o');
+function handleQuizApp() {
+  // all event listeners here
+  $(QUIZ_INTRO_BUTTON).on("click", event => {
+    $(QUIZ_INTRO_BOX).addClass('hidden');
+    $(QUIZ_QUESTIONS_BOX).removeClass('hidden');
+    // intro question results
+  });
   
-  $.get('/dreams', function(dreams) {
-    dreams.forEach(function(dream) {
-      $('<li></li>').text(dream).appendTo('ul#dreams');
-    });
-  });
+  // 1. Do the same for results
+  // 2. HTML Wireframe
+  
+}
 
-  $('form').submit(function(event) {
-    event.preventDefault();
-    var dream = $('input').val();
-    $.post('/dreams?' + $.param({dream: dream}), function() {
-      $('<li></li>').text(dream).appendTo('ul#dreams');
-      $('input').val('');
-      $('input').focus();
-    });
-  });
-
-});
+$(handleQuizApp);

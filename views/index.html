@@ -1,17 +1,8 @@
-<!-- This is a static file -->
-<!-- served from your routes in server.js -->
-
-<!-- You might want to try something fancier: -->
-<!-- html/nunjucks docs: https://mozilla.github.io/nunjucks/ -->
-<!-- pug: https://pugjs.org/ -->
-<!-- haml: http://haml.info/ -->
-<!-- hbs(handlebars): http://handlebarsjs.com/ -->
-
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Welcome to Glitch!</title>
-    <meta name="description" content="A cool thing made with Glitch">
+    <title>Quiz App Project</title>
+    <meta name="description" content="Interactive Quiz App">
     <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,28 +11,47 @@
   </head>
   <body>
     <header>
-      <h1>
-        A Dream of the Future
-      </h1>
+
     </header>
 
     <main>
-      <p class="bold">Oh hi,</p>
-      <p>Tell me your hopes and dreams:</p>
-      <form>
-        <input type="text" maxlength="100" placeholder="Dreams!">
-        <button type="submit">Submit</button>
-      </form>
-      <section class="dreams">
-        <ul id="dreams">
-        </ul>
-      </section>
+      <h1>
+        The name of my quiz
+      </h1>
+      
+      <div class="intro-box quiz-boxes">
+        <h2>Title of quiz</h2>
+        <p>
+          This is what my quiz does
+        </p>
+        <button class="intro-button">
+          Start!
+        </button>
+      </div>
+      
+      <div class="questions-box quiz-boxes hidden">
+        <form role="form" class="questions-form" action="" method="post">
+          <container class="backgroundBox">
+            <h2>Question goes here</h2>
+            
+          </container>
+          
+        </form>
+      </div>
+      
+      <div class="results-box quiz-boxes hidden">
+        <h2>
+          Here is how you did
+        </h2>
+        <p>
+          Your score is 5
+        </p>
+      </div>
+      
     </main>
 
     <footer>
-      <a href="https://glitch.com">
-        Remix this in Glitch
-      </a>
+  
     </footer>
 
     <!-- Your web-app is https, so your scripts need to be too -->
