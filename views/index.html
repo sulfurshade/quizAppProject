@@ -10,19 +10,21 @@
     <link rel="stylesheet" href="/style.css">
   </head>
   <body>
-    <header>
-
+    <div class="body-box">
+    <header class="title-bar">
+      <h1 class="quiz-title">Geek Quiz</h1>
     </header>
 
     <main>
-      <h1>
-        The name of my quiz
+      <h1 class="quiz-subtitle">
+        Do you know geek trivia?
       </h1>
       
       <div class="intro-box quiz-boxes">
-        <h2>Title of quiz</h2>
+        <h2>It's time for some geek trivia!</h2>
         <p>
-          This is what my quiz does
+          Do you think you have what it takes to prove your geekiness? <br>
+          Find out right now by seeing if you can answer these sci-fi, math, science, and geek pop culture questions!
         </p>
         <button class="intro-button">
           Start!
@@ -30,21 +32,26 @@
       </div>
       
       <div class="questions-box quiz-boxes hidden">
-        <form role="form" class="questions-form" action="" method="post">
-          <container class="backgroundBox">
-            <h2>Question goes here</h2>
+        <form role="form" class="questions-form" action="" method="post" id="quiz-form">
+          <container class="input-box">
+            <p class="quiz-text" id="quiz-question">Here is my question</p>
             
+            <label id="quiz-answer0"><input type="radio" value="0" name="radio-choice" required /><span>Answers go here</span></label><br />
+            <label id="quiz-answer1"><input type="radio" value="1" name="radio-choice" /><span>Answers go here</span></label><br />
+            <label id="quiz-answer2"><input type="radio" value="2" name="radio-choice" /><span>Answers go here</span></label><br />
+            <label id="quiz-answer3"><input type="radio" value="3" name="radio-choice" /><span>Answers go here</span></label><br />
+            
+            <button id="submit-button" type="submit">Submit Answer</button>
           </container>
-          
         </form>
       </div>
       
       <div class="results-box quiz-boxes hidden">
-        <h2>
-          Here is how you did
+        <h2 id="quiz-results">
+          <span>Here is how you did</span>
         </h2>
-        <p>
-          Your score is 5
+        <p class="results-text">
+          <span>Your score is 5</span>
         </p>
       </div>
       
@@ -59,6 +66,6 @@
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
             crossorigin="anonymous"></script>
     <script src="/client.js"></script>
-
+    </div>
   </body>
 </html>
