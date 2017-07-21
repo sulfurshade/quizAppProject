@@ -4,7 +4,9 @@ const QUIZ_QUESTIONS_BOX = ".questions-box";
 const QUIZ_RESULTS_BOX = ".results-box";
 const QUIZ_SUBMIT_BUTTON = "#submit-button";
 const QUIZ_RESULTS = "#quiz-results";
-const QUIZ_RESULTS_TEXT = ".results-text"
+const QUIZ_RESULTS_TEXT = ".results-text";
+const QUIZ_MODAL_POPUP = ".modal";
+const QUIZ_MODAL_CLOSE = ".close-button";
 
 var correctCount = 0;
 var currentQuestion = 0;
@@ -54,7 +56,7 @@ var questions = [
     rightAnswer: 1  //compare index of user answer to rightAnswer
   },
   {
-    question: "What’s the eighth digit (after the decimal point) of π? (pi)", //question FIVE 5
+    question: "What’s the 13th digit (after the decimal point) of π? (pi)", //question FIVE 5
     answers: [
       "4",
       "2",
@@ -154,12 +156,18 @@ var questions = [
   }
 ]
 
-var results = ["You got 13 yay", "You got 10-12 yay", "You got 7-9 yay", "You got 4-6 yay", "You got 1-3 yay", "You got 0 yay"]
+var results = ["Wow, a perfect score! You are a true geek, gifted in all ways of geek knowledge.", 
+               "Awesome, you are pretty geek, but you still have a bit to learn.", 
+               "You are a geek in your own way. However, you have a bit more to go if you want to become a real geek.", 
+               "You are definitely not a true geek, but atleast you have a basic understanding of what it means to be one.", 
+               "Not even close! You tried, but Yoda would be very disgusted.", 
+               "Wow, a 0. Do you even KNOW what Star Wars is??"]
 
 function showScore() {
   $(QUIZ_QUESTIONS_BOX).addClass("hidden");
   $(QUIZ_RESULTS_BOX).removeClass("hidden");
   $(QUIZ_RESULTS).find('span').text("You got " + correctCount + " out of 13 correct!");
+  
   if (correctCount === 13) {
     $(QUIZ_RESULTS_TEXT).find('span').text(results[0]);
   } else if (correctCount > 9) {
@@ -177,16 +185,19 @@ function showScore() {
 
 function checkAnswer(answerChoice) {
   var correctAnswer = questions[currentQuestion].rightAnswer;
-  if (answerChoice == correctAnswer) {
-    correctCount++;
-    answerPopup(true);
-    currentQuestion++;
-  } else if (answerChoice == undefined) {
+  
+  if (answerChoice === undefined) {
     answerPopup('unanswered');
-  } else {
-    answerPopup(false);
-    currentQuestion++;
+    return;
   }
+  
+  if (Number(answerChoice) === correctAnswer) {
+    correctCount++;
+    answerPopup('correct');  
+  } else {
+    answerPopup('incorrect');
+  }
+  currentQuestion++;
 }
 
 function displayQuestion(questionNumber) {
@@ -198,8 +209,14 @@ function displayQuestion(questionNumber) {
   $('input[name="radio-choice"]').prop('checked', false);
 }
 
-function answerPopup() {
-  
+function answerPopup(userInput) {
+  if (userInput === 'unanswered') {
+    return;
+  }
+  if (userInput === 'correct') {
+    $(QUIZ_MODAL_POPUP).removeClass('hidden');
+    // display correct feedback....
+  }
 }
 
 $(function () {
@@ -220,64 +237,17 @@ $(function () {
       showScore();
     }
   });
+  
+  $(QUIZ_MODAL_CLOSE).click(function() {
+    $(QUIZ_MODAL_POPUP).addClass('hidden');
+  });
+  
   displayQuestion(0);
 });
 
-// // @param {String} name - input your name here
-// function getRandomInt(min, max) {
-//   return Math.floor(Math.random() * (max - min + 1) + min);
-// }
-
-// function printAnswers(question){
-//   var answersHtml = [];
-//   var index = getRandomInt(0, 3);
-//   answersHtml[index] = question.correctAnswer;
-
-//   var arrayIndex = 0;
-//   for (var i = 0; i < 3; i++) {
-//     if (!answersHtml[arrayIndex]) {
-//       answersHtml[arrayIndex++] = question.wrongAnswers[i];
-//     }
-//     else {
-//       answersHtml[++arrayIndex] = question.wrongAnswers[i];
-//     }
-//   }
-//   console.log(answersHtml);
-// }
-
-// printAnswers(questions[0])
-
-// function handleQuizApp() {
-//   // all event listeners here
-//   $(QUIZ_INTRO_BUTTON).on("click", event => {
-//     $(QUIZ_INTRO_BOX).addClass('hidden');
-//     $(QUIZ_QUESTIONS_BOX).removeClass('hidden');
-//     // intro question results
-//     var cAnswer = questions[0].correctAnswer;
-//     $("#quiz-questions").text(questions[0].question);
-//     $("#quiz-answers1").html('<input type="radio" value="0" name="radio-choice" />' + testVar);
-//     $("#quiz-answers2").html('<input type="radio" value="0" name="radio-choice" />Hello world!11');
-//     $("#quiz-answers3").html('<input type="radio" value="0" name="radio-choice" />Hello world!11');
-//     $("#quiz-answers4").html('<input type="radio" value="0" name="radio-choice" />Hello world!11');
-//   });
-
-// 1. Do the same for results
-// 2. HTML Wireframe
-// 3. Write all your questions.
-// 4. Showing questions dynamically (Next Question)
-
-// }
-
-// $(handleQuizApp);
-
-// $( "# your form id" ).submit(function( event ) {
-
-//   event.preventDefault();
-//   console.log("show next question")
-// });
-
-// document ready - intro div
-// start button - hide intro div - show quiz div
-// for loop: load in q1 - radio select - button shows popup - iterates to q2 - repeat until 10
-// upon completion, button hides quiz div - shows results div
-// results screen is shown
+var modal = document.getElementById('popup-modal');
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
