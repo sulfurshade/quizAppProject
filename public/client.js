@@ -7,6 +7,8 @@ const QUIZ_RESULTS = "#quiz-results";
 const QUIZ_RESULTS_TEXT = ".results-text";
 const QUIZ_MODAL_POPUP = ".modal";
 const QUIZ_MODAL_CLOSE = ".close-button";
+const QUIZ_MODAL_PIC = ".modal-pic";
+const QUIZ_MODAL_TEXT = '.modal-text';
 
 var correctCount = 0;
 var currentQuestion = 0;
@@ -19,9 +21,8 @@ var questions = [
       "Kilobyte",
       "Terabyte",
       "Uberbyte"
-    ]
-    ,
-    rightAnswer: 2  //compare index of user answer to rightAnswer
+    ],
+    rightAnswer: 2
   },
   {
     question: "Who orchestrated the original 3 Star Wars films?", //question TWO 2
@@ -32,7 +33,7 @@ var questions = [
       "Bernard Herrmann"
     ]
     ,
-    rightAnswer: 1  //compare index of user answer to rightAnswer
+    rightAnswer: 1
   },
   {
     question: "In our solar system which two planets rotate clockwise?", //question THREE 3
@@ -42,7 +43,7 @@ var questions = [
       "Mercury & Pluto",
       "Venus & Uranus"
     ],
-    rightAnswer: 3  //compare index of user answer to rightAnswer
+    rightAnswer: 3
   },
   {
     question: "Which of these actors has NOT played Batman?", //question FOUR 4
@@ -53,7 +54,7 @@ var questions = [
       "Michael Keaton"
     ]
     ,
-    rightAnswer: 1  //compare index of user answer to rightAnswer
+    rightAnswer: 1
   },
   {
     question: "What’s the 13th digit (after the decimal point) of π? (pi)", //question FIVE 5
@@ -64,7 +65,7 @@ var questions = [
       "7"
     ]
     ,
-    rightAnswer: 3  //compare index of user answer to rightAnswer
+    rightAnswer: 3
   },
   {
     question: "What is the most abundant element in the earth's atmosphere?", //question SIX 6
@@ -75,7 +76,7 @@ var questions = [
       "Helium"
     ]
     ,
-    rightAnswer: 1  //compare index of user answer to rightAnswer
+    rightAnswer: 1
   },
   {
     question: "What does HTTP stand for in a website address?", //question SEVEN 7
@@ -86,7 +87,7 @@ var questions = [
       "HyperText Trailing Protocol"
     ]
     ,
-    rightAnswer: 2  //compare index of user answer to rightAnswer
+    rightAnswer: 2
   },
   {
     question: "What are the four houses at Hogwarts School of Witchcraft and Wizardry?", //question EIGHT 8
@@ -97,7 +98,7 @@ var questions = [
       "Granger, Weasley, Voldemort & Dumbledore"
     ]
     ,
-    rightAnswer: 0  //compare index of user answer to rightAnswer
+    rightAnswer: 0
   },
   {
     question: "Which of these famous people did NOT cameo in The Fifth Element?", //question NINE 9
@@ -108,7 +109,7 @@ var questions = [
       "Mac McDonald"
     ]
     ,
-    rightAnswer: 0  //compare index of user answer to rightAnswer
+    rightAnswer: 0
   },
   {
     question: "What is the name of the main protagonist in the Legend of Zelda series of video games?", //question TEN 10
@@ -119,7 +120,7 @@ var questions = [
       "Link"
     ]
     ,
-    rightAnswer: 3  //compare index of user answer to rightAnswer
+    rightAnswer: 3
   },
   {
     question: "How many pairs of chromosomes are in found in the average human?", //question 11
@@ -130,7 +131,7 @@ var questions = [
       "Thirty-four"
     ]
     ,
-    rightAnswer: 0  //compare index of user answer to rightAnswer
+    rightAnswer: 0
   },
   {
     question: "What does the acronym \"NASA\" stand for?", //question 12
@@ -141,7 +142,7 @@ var questions = [
       "National Academy Searching for Aliens"
     ]
     ,
-    rightAnswer: 2  //compare index of user answer to rightAnswer
+    rightAnswer: 2
   },
   {
     question: "When referring to computers, what does that acronym RAM stand for?", //question 13
@@ -152,7 +153,7 @@ var questions = [
       "Restricted-Access Media"
     ]
     ,
-    rightAnswer: 0  //compare index of user answer to rightAnswer
+    rightAnswer: 0
   }
 ]
 
@@ -215,7 +216,13 @@ function answerPopup(userInput) {
   }
   if (userInput === 'correct') {
     $(QUIZ_MODAL_POPUP).removeClass('hidden');
-    // display correct feedback....
+    $(QUIZ_MODAL_PIC).attr("src", "https://media.giphy.com/media/Tcr6ZB3wcvG5q/giphy.gif");
+    $(QUIZ_MODAL_TEXT).text("You got it right, nice one!");
+    
+  } else {
+    $(QUIZ_MODAL_POPUP).removeClass('hidden');
+    $(QUIZ_MODAL_PIC).attr("src", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Sad_face.gif/1024px-Sad_face.gif");
+    $(QUIZ_MODAL_TEXT).text("Uh oh, you got it wrong...");
   }
 }
 
@@ -241,7 +248,6 @@ $(function () {
   $(QUIZ_MODAL_CLOSE).click(function() {
     $(QUIZ_MODAL_POPUP).addClass('hidden');
   });
-  
   displayQuestion(0);
 });
 
